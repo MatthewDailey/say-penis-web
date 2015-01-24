@@ -7409,3 +7409,8 @@ ul.side-nav.full {
 .cock {
   font-family: "Cocksure";
 }
+
+audio { 
+  height: 100px;
+  width: 245px;       
+}
