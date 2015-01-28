@@ -24,10 +24,35 @@ JINJA_ENVIRONMENT = jinja2.Environment(
       autoescape=True)
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self):
-	template = JINJA_ENVIRONMENT.get_template('index.html')
-	self.response.write(template.render({}))
+  def get(self):
+    template = JINJA_ENVIRONMENT.get_template('index.html')
+    self.response.write(template.render({}))
+
+
+class ListenHandler(webapp2.RequestHandler):
+  def get(self, shareId):
+    template = JINJA_ENVIRONMENT.get_template('listen.html')
+    self.response.write(template.render({'code':shareId}))
+
+class InvalidShareHandler(webapp2.RequestHandler):
+  def get(self, url):
+    template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
+    self.response.write(template.render({"error_message":"The code '" + url +\
+       "' is not a valid penis code. Once you have a valid penis code, enter \
+       it in the android app to listen."}))
+
+
+class FourOhFourHandler(webapp2.RequestHandler):
+  def get(self, url):
+    template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
+    self.response.write(template.render({"error_message":"Doesn't look like \
+      there's anything here."}))
+
+      
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/l/([a-z|0-9]{6})', ListenHandler),
+    ('/l/(.*)', InvalidShareHandler),
+    ('/(.*)', FourOhFourHandler)
 ], debug=True)
