@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +9,7 @@
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <nav class="red accent-2" role="navigation">
-    <div class="container">
-      <div class="nav-wrapper">
-       <a id="logo-container" href="#" class="brand-logo light Roboto">Say Penis</a>
-     </div>
-   </div>
- </nav>
+ {% include 'navbar.html' %}
  <div class="section no-pad-bot" id="index-banner">
   <div class="container">
     <br><br>
@@ -53,7 +46,7 @@
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="images/result.webp">            
+              <img src="images/successful_result.webp">            
             </div>
             <div class="card-content">
               <span class="card-title grey-text text-darken-4">Listen</span>
@@ -65,11 +58,11 @@
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="images/scores.webp">            
+              <img src="images/share.webp">            
             </div>
             <div class="card-content">
-              <span class="card-title grey-text text-darken-4">Play</span>
-              <p>Play locally and compete with your friends!</p>
+              <span class="card-title grey-text text-darken-4">Share</span>
+              <p>Share your penises with your friends and the world!</p>
             </div>
           </div>
         </div>
@@ -156,17 +149,12 @@
   </div>
 </div>
 
-<footer class="page-footer light-red ">
-    <div class="footer-copyright">
-      <div class="container">
-      © 2015 Matt Dailey, All rights reserved.
-      </div>
-    </div>
-  </footer>
-
+{% include 'footer.html' %}
+{% include 'scripts.html' %}
       <!--  Scripts-->
+
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script src="../../dist/js/materialize.min.js"></script>
+      <script src="js/materialize.min.js"></script>
       <script src="js/init.js"></script>
 
     </body>

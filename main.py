@@ -23,6 +23,33 @@ JINJA_ENVIRONMENT = jinja2.Environment(
       extensions=['jinja2.ext.autoescape'],
       autoescape=True)
 
+"""
+Blog writing how-to:
+
+1. Write a html file with content which extends abstract-blog.html.
+2. Write a html file with content to be used as a blerd.
+3. Add a BlogPost to blogPosts with the appropriate args.
+
+"""
+
+class BlogPost:
+  def __init__(self, title, blerbPath, articleId, articlePath, imagePath=None):
+    self.title = title
+    self.blerbPath = blerbPath
+    self.articleId = articleId
+    self.articlePath = articlePath
+    self.imagePath = imagePath
+
+blogPosts = [
+  BlogPost("Title 1", "testblog-b1-blerb.html", "article1", "testblog-b1.html", "images/image.jpg"),
+  BlogPost("Origin Story", "testblog-b1-blerb.html", "origin_story  ", "testblog-b1.html")]
+
+def findBlog(articleId):
+  for blog in blogPosts:
+    if blog.articleId == articleId:
+      return blog
+  return None
+
 class MainHandler(webapp2.RequestHandler):
   def get(self):
     template = JINJA_ENVIRONMENT.get_template('index.html')
@@ -41,18 +68,36 @@ class InvalidShareHandler(webapp2.RequestHandler):
        "' is not a valid penis code. Once you have a valid penis code, enter \
        it in the android app to listen."}))
 
-
 class FourOhFourHandler(webapp2.RequestHandler):
   def get(self, url):
     template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
     self.response.write(template.render({"error_message":"Doesn't look like \
       there's anything here."}))
 
-      
+class BlogHandler(webapp2.RequestHandler):
+  def get(self, url):
+    blog = findBlog(url)
+    template = JINJA_ENVIRONMENT.get_template('no_blog.html')
+    if blog:
+      template = JINJA_ENVIRONMENT.get_template(blog.articlePath)
+    self.response.write(template.render({}))
+
+class BaseBlogHandler(webapp2.RequestHandler):
+  def get(self):
+    template = JINJA_ENVIRONMENT.get_template('blog_base.html')
+    self.response.write(template.render({"blogs":blogPosts}))
+
+class CareerHandler(webapp2.RequestHandler):
+  def get(self):
+    template = JINJA_ENVIRONMENT.get_template('careers.html')
+    self.response.write(template.render({}))      
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/l/([a-z|0-9]{6})', ListenHandler),
     ('/l/(.*)', InvalidShareHandler),
+    ('/blog', BaseBlogHandler),
+    ('/blog/(.*)', BlogHandler),
+    ('/careers', CareerHandler),
     ('/(.*)', FourOhFourHandler)
 ], debug=True)

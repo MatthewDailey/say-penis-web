@@ -12,6 +12,9 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /blogs
+  static_dir: blogs
+
 - url: /font
   static_dir: font
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Say Penis</title>
+
+  <!-- CSS  -->
+  <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+ {% include 'navbar.html' %}  
+ <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+      <br>
+      <h1 class="header center red-text cock">{% block title %}{% endblock %}</h1>
+      <div class="row">
+        {% block content %}{% endblock %}
+      </div>
+</div>
+{% include 'footer.html' %}
+{% include 'scripts.html' %}
+
+</body>
+</html>
