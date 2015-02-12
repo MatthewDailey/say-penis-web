@@ -1,0 +1,86 @@
+{% extends "abstract-blog.html" %}
+
+{% block title %}Origin Story{% endblock %}
+
+{% block content %}
+<div class="row center">
+    <span class="flow-text">Lessons learned from the birth of Say Penis</span>
+</div>
+<br>
+
+<div class="row center">
+    <div class="col l4 offset-l4 m6 offset-m3 s8 offset-s2"> 
+        <img class="responsive-img" src="/images/first_day_say_penis.jpg">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col l8 offset-l2 s12" style="line-height: 2em;"> 
+        <p>The idea for Say Penis goes back to 2013. I wish I knew the exact
+        origin but I don't. I remember sitting in my old room in Seattle's University District. I distinctly 
+        remember jumping up and down and getting really excited as it started to take shape. I really 
+        enjoy working on Say Penis and now it's in it's second incarnation I've learned a lot.
+        I'll share 2 tidbits now and probably more when I feel like writing more.</p>
+
+        <span class="flow-text"><b>Lesson 1:</b> Only develop features users give a fuck about.</span>
+
+        <p>The original version had only 1 activity which allowed users to load and sort scores based on various parameters.
+        That probably sounds really simple but let me tell you, it was not.
+        I probably spent the majority of dev time implementing the loading and paging of game results
+        ordered on various paramters. I thought hard about how to properly page data when the user 
+        requested multiple sorts. For example, how should I pull the next page of results as the user
+        scrolls down after first sorting by player name and then by score date?
+
+        <p>You might be thinking, "Well Matt, you boxed yourself into a shitty UX corner by having 
+        only one view to hold the results." You'd probably be right. However, in the end, all that 
+        work would have been a waste either way. When I demoed the game no one gave a fuck about 
+        looking up scores based on any parameters. All they cared about was whatever scores
+        the app was already showing them.</p>
+
+        <p>Even when I explained, "Look, you can go see all your scores. And look! If you scroll it
+        automatically loads the best data to show next!" no one cared. All they wanted to see was who
+        was best.</p>
+
+        <span class="flow-text"><b>Lesson 2:</b> Know where your data centers are.</span>        
+
+        <p>The first iteration of Say Penis was backed by SimpleDB on AWS and since I was working in
+        Seattle I just spun up a database in the US West region. Everything thing went great to start.
+        AWS is awesome to work with and the documentation is vast but specific so the answer is almost 
+        always out there.</p>
+
+        <p>Fast forward a year. I've built the app, demo'd to friends and released on the app
+        store. People are downloading it on the app store and I'm the number one game for the search 
+        "Say Penis"! Awesome! However, one day I go to stroke my ego and look at all the awesome 5 star
+        reviews I should have in the bank. To my dismay, Say Penis is barely rated 3 stars. What gives?</p>
+
+        <p>When I looked at the comments with low ratings it became obvious what the issue was. I saw
+        a bunch of 1-star ratings with euro-jibberish comments. Fortunately, Google will automatically
+        translate euro-jibberish to english and I found out most of the comments said something like
+        "no penis!1!!" or "where is the penis!!?".</p>
+    </div>
+</div>
+
+<div class="row">
+<div class="col l8 offset-l2 s12">
+  <div class="card">
+    <div class="card-image">
+      <img src="/images/euro-jibberish.png">
+    </div>
+    <div class="card-content">
+      <p>Some helpful comments from across the pond.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col l8 offset-l2 s12" style="line-height: 2em;"> 
+        <p>When you release an app to the Google Play store it lets you choose which countries to 
+        release in. I had naively chosen to give the whole world access without concidering that 
+        all my data was stored in an Oregon data center. This left the would-be euro-penis-sayers
+        frustrated, sitting around with nothing better to do than give me a 1-star rating.</p>
+    </div>
+</div>
+
+<p></p>
+{% endblock %}
