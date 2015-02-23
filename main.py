@@ -72,6 +72,10 @@ class FourOhFourHandler(webapp2.RequestHandler):
     template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
     self.response.write(template.render({"error_message":"Doesn't look like \
       there's anything here."}))
+  def post(self, url):
+    template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
+    self.response.write(template.render({"error_message":"Doesn't look like \
+      there's anything here."}))
 
 class BlogHandler(webapp2.RequestHandler):
   def get(self, url):
@@ -89,7 +93,8 @@ class BaseBlogHandler(webapp2.RequestHandler):
 class CareerHandler(webapp2.RequestHandler):
   def get(self):
     template = JINJA_ENVIRONMENT.get_template('careers.html')
-    self.response.write(template.render({}))      
+    self.response.write(template.render({}))   
+   
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

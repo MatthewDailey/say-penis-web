@@ -14,12 +14,17 @@
   <div class="container">
     <br><br>
     <h1 class="header center red-text cock">How well can you say penis?</h1>
-        <div class="row center">
+    <div class="row center">
       <span class="flow-text col s12">Say Penis is a party game which rates players on how well they can enunciate the word <i>penis</i>.</span>
     </div>
     <br>
-    <div class="row center">
-      <a href="https://play.google.com/store/apps/details?id=say.penis" id="download-button" class="btn-large waves-effect waves-light red">Play on Android</a>
+    <div class="row center">     
+      <a class="btn-large disabled">Play on Android</a>
+      <!-- <a href="https://play.google.com/store/apps/details?id=say.penis" id="download-button" class="btn-large waves-effect waves-light red disabled">Play on Android</a> -->
+            <div classe="col s12">
+              <p>Say Penis is currently in alpha testing. Scroll down for instruction on how to try the alpha version.</p>
+            </div>
+
     </div>
     <br><br>
   </div>
@@ -27,9 +32,7 @@
 
 
 <div class="container">
-  <div class="section">
-
-    <div class="row">
+    <div class="row section">
 
         <div class="col s12 m4">
           <div class="card">
@@ -67,16 +70,13 @@
           </div>
         </div>
     </div>
-        <br><br>
 
-        <div class="divider"></div>
+      <div class="divider"></div>
 
-    <div class="row">
+      <div class="row section">
         <h2 class="light header center col s12 red-text">Testimonials</h2>
         <p class="light caption center col s12">Hear what our users are talking about!</p>
-    </div>
 
-    <div class="row">
         <div class="col s12 m6 l6 center">
               <audio controls>
                 <source src="media/recording_matt_d.mp3" type="audio/mpeg">
@@ -113,49 +113,69 @@
               <br>
               <span class="flow-text">Thomas P.</span>
         </div>
-
       </div>
 
+      <div class="divider"></div>
 
-       <div class="divider"></div>
+      <div class="row section">
+        <h2 class="light header center col s12 red-text">Early Access</h2>
+        <p class="light caption center col s12">Join the alpha or beta test groups and get access to the most cutting edge penises!</p>
 
-        <div class="row">
-            <h2 class="light header center col s12 red-text">Try the Alpha Version</h2>
-            <p class="light caption center col s12">Get access to the most cutting edge penises!</p>
+        <div class="col s10 offset-s1">
+          <div class="row section">
+            <h4 class="bold header center">Beta Test</h4>
+            <p>Beta releases are more stable and less frequent than alpha. The beta is open to anyone who wants early access to a relatively
+            stable version of the app.</p>
+            <p>To join the beta test, simply join the <a href="https://plus.google.com/communities/109658202006902671992">say-penis-android-beta</a> community on Google+ and install the app from <a href="https://play.google.com/store/apps/details?id=say.penis">Google Play</a>.</p>
+          </div>
 
-      <table class="col s10 offset-s1">
-        <thead>
-          <tr>
-              <th data-field="id">Steps</th>
-          </tr>
-        </thead>
+          <div class="row section">
+          <h4 class="bold header center">Alpha Test</h4>
+          <table>
+            <thead>
+              <tr>
+                <th data-field="id">Steps to join the alpha test</th>
+              </tr>
+            </thead>
 
-        <tbody>
-          <tr>
-            <td>1. Ask to join the <a href="https://plus.google.com/communities/103071155941075905692">say-penis-android-alpha</a> community on Google+.</td>
-          </tr>
-          <tr>
-            <td>2. Once you have joined the community, join the test and download the app from <a href="https://play.google.com/apps/testing/say.penis">the Google Play Store</a>.</td>
-          </tr>
-                    <tr>
-            <td>3. Say Penis whenever and whereever you want!</td>
-          </tr>
-        </tbody>
-      </table>
+            <tbody>
+              <tr>
+                <td>1. Submit your email below to request to join the public <a href="https://plus.google.com/communities/103071155941075905692">say-penis-android-alpha</a> community on Google+.
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <form id="alpha-email">
+                      <div class="input-field col m8 offset-m1 s10 offset-s1">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                      </div>
+                      <div class="input-field col m2 s10 offset-s1">
+                        <button class="btn waves-effect waves-light red" type="submit" formaction="/alpha" formmethod="post" formid="alpha-email" name="action">Submit
+                          <i class="mdi-content-send right"></i>
+                        </button>
+                      </div>
 
+                  </form>
+                </td>
+              </tr>
+              <tr>
+                <td>2. There is limited space so you may not receive an invite immediately. Once you do, join the community and download the app from <a href="https://play.google.com/apps/testing/say.penis">the Google Play Store</a>.</td>
+              </tr>
+                        <tr>
+                <td>3. Say Penis whenever and whereever you want!</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        
-    
-  </div>
+      </div>
+
+    </div>
 </div>
 
 {% include 'footer.html' %}
 {% include 'scripts.html' %}
       <!--  Scripts-->
-
-      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script src="js/materialize.min.js"></script>
-      <script src="js/init.js"></script>
 
     </body>
     </html>
