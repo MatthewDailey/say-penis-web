@@ -22,7 +22,7 @@
       <a class="btn-large disabled">Play on Android</a>
       <!-- <a href="https://play.google.com/store/apps/details?id=say.penis" id="download-button" class="btn-large waves-effect waves-light red disabled">Play on Android</a> -->
             <div classe="col s12">
-              <p>Say Penis is currently in alpha testing. Scroll down for instruction on how to try the alpha version.</p>
+              <p>Say Penis is currently a test release. Scroll to the bottom or <a href="/#early-access">click here</a> for instruction on how to try the early release version.</p>
             </div>
 
     </div>
@@ -118,7 +118,9 @@
       <div class="divider"></div>
 
       <div class="row section">
-        <h2 class="light header center col s12 red-text">Early Access</h2>
+        <a name="early-access">
+          <h2 class="light header center col s12 red-text">Early Access</h2>
+        </a>
         <p class="light caption center col s12">Join the alpha or beta test groups and get access to the most cutting edge penises!</p>
 
         <div class="col s10 offset-s1">
@@ -145,13 +147,13 @@
               </tr>
               <tr>
                 <td>
-                  <form id="alpha-email">
+                  <form name action="alpha" method="post" id="alpha-email" >
                       <div class="input-field col m8 offset-m1 s10 offset-s1">
-                        <input id="email" type="email" class="validate">
+                        <input id="email" type="email" name="email" class="validate">
                         <label for="email">Email</label>
                       </div>
                       <div class="input-field col m2 s10 offset-s1">
-                        <button class="btn waves-effect waves-light red" type="submit" formaction="/alpha" formmethod="post" formid="alpha-email" name="action">Submit
+                        <button class="btn waves-effect waves-light red" type="submit">Submit
                           <i class="mdi-content-send right"></i>
                         </button>
                       </div>
