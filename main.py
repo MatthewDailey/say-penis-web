@@ -14,9 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import logging
 import os
 import webapp2
 import jinja2
+import google.appengine.api.mail as mail
+from google.appengine.ext import ndb
+from datetime import datetime
 
 JINJA_ENVIRONMENT = jinja2.Environment(
       loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -49,6 +53,10 @@ def findBlog(articleId):
       return blog
   return None
 
+class AlphaRequest(ndb.Model):
+  email = ndb.StringProperty()
+  request_time = ndb.DateTimeProperty()
+
 class MainHandler(webapp2.RequestHandler):
   def get(self):
     template = JINJA_ENVIRONMENT.get_template('index.html')
@@ -67,15 +75,23 @@ class InvalidShareHandler(webapp2.RequestHandler):
        "' is not a valid penis code. Once you have a valid penis code, enter \
        it in the android app to listen."}))
 
-class FourOhFourHandler(webapp2.RequestHandler):
-  def get(self, url):
-    template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
-    self.response.write(template.render({"error_message":"Doesn't look like \
-      there's anything here."}))
-  def post(self, url):
-    template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
-    self.response.write(template.render({"error_message":"Doesn't look like \
-      there's anything here."}))
+class AlphaTestHandler(webapp2.RequestHandler):
+  def get(self):
+    template = JINJA_ENVIRONMENT.get_template('alpha-test.html')
+    self.response.write(template.render({"success":False}))
+  
+  def post(self):
+    template = JINJA_ENVIRONMENT.get_template('alpha-test.html')
+    email = self.request.get('email')
+    try:
+      mail.check_email_valid(email, 'email')
+      alphaRequest = AlphaRequest(id=email)
+      alphaRequest.email = email
+      alphaRequest.request_time = datetime.now()
+      alphaRequest.put()
+      self.response.write(template.render({"success":True, "email":email}))
+    except:
+      self.response.write(template.render({"success":False, "email":email}))
 
 class BlogHandler(webapp2.RequestHandler):
   def get(self, url):
@@ -94,7 +110,16 @@ class CareerHandler(webapp2.RequestHandler):
   def get(self):
     template = JINJA_ENVIRONMENT.get_template('careers.html')
     self.response.write(template.render({}))   
-   
+
+class FourOhFourHandler(webapp2.RequestHandler):
+  def get(self, url):
+    template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
+    self.response.write(template.render({"error_message":"Doesn't look like \
+      there's anything here."}))
+  def post(self, url):
+    template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
+    self.response.write(template.render({"error_message":"Doesn't look like \
+      there's anything here."}))   
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
@@ -103,5 +128,6 @@ app = webapp2.WSGIApplication([
     ('/blog', BaseBlogHandler),
     ('/blog/(.*)', BlogHandler),
     ('/careers', CareerHandler),
+    ('/alpha', AlphaTestHandler),
     ('/(.*)', FourOhFourHandler)
 ], debug=True)

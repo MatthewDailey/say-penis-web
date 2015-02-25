@@ -133,42 +133,7 @@
 
           <div class="row section">
           <h4 class="bold header center">Alpha Test</h4>
-          <table>
-            <thead>
-              <tr>
-                <th data-field="id">Steps to join the alpha test</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>1. Submit your email below to request to join the public <a href="https://plus.google.com/communities/103071155941075905692">say-penis-android-alpha</a> community on Google+.
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <form name action="alpha" method="post" id="alpha-email" >
-                      <div class="input-field col m8 offset-m1 s10 offset-s1">
-                        <input id="email" type="email" name="email" class="validate">
-                        <label for="email">Email</label>
-                      </div>
-                      <div class="input-field col m2 s10 offset-s1">
-                        <button class="btn waves-effect waves-light red" type="submit">Submit
-                          <i class="mdi-content-send right"></i>
-                        </button>
-                      </div>
-
-                  </form>
-                </td>
-              </tr>
-              <tr>
-                <td>2. There is limited space so you may not receive an invite immediately. Once you do, join the community and download the app from <a href="https://play.google.com/apps/testing/say.penis">the Google Play Store</a>.</td>
-              </tr>
-                        <tr>
-                <td>3. Say Penis whenever and whereever you want!</td>
-              </tr>
-            </tbody>
-          </table>
+          {% include 'alpha_test_instruction_table.html' %}
         </div>
       </div>
 
