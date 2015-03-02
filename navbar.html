@@ -1,14 +1,26 @@
-  <nav class="red accent-2" role="navigation">
-    <div class="container">
-      <div class="nav-wrapper">
-        <a id="logo-container" href="/" class="brand-logo light Roboto">Say Penis</a>
-        <ul id="nav-mobile" class="right side-nav" style="left: -250px">
-          <li class="bold"><a href="/blog">Blog</a></li>
-          <li class="bold"><a href="/careers">Careers</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse">
-          <i class="mdi-navigation-menu"></i>
-        </a>
-     </div>
-   </div>
- </nav>
+<nav class="top-nav">
+  <div class="container">
+    <div class="nav-wrapper">
+      
+      <a href="/" class="brand-logo">
+        <div class="hide-on-med-and-down">
+          <span>Say Penis</span>
+        </div>
+        <div class="hide-on-large-only">
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+          <span style="padding-left:15px;font-size: 2em;">Say Penis</span>
+        </div>
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/careers">Careers</a></li>
+      </ul>
+
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/careers">Careers</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
