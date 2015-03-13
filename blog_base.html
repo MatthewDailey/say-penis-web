@@ -21,7 +21,7 @@
           <div class="card white darken-1">
             {% if blog.imagePath %}
             <div class="card-image">
-              <img src="blog.imagePath">
+              <img src="{{blog.imagePath}}">
             </div>
             {% endif %}
             <div class="card-content">
@@ -39,6 +39,7 @@
 
 <br><br>
 
+{% include 'footer.html' %}
 
 {% include 'scripts.html' %}
 

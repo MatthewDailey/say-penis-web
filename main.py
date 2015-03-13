@@ -45,7 +45,8 @@ class BlogPost:
     self.imagePath = imagePath
 
 blogPosts = [
-  BlogPost("Origin Story", "b01-originstory-blerb.html", "origin_story", "b01-originstory.html")]
+  BlogPost("Origin Story", "b01-originstory-blerb.html", "origin_story", "b01-originstory.html"),
+  BlogPost("What is Say Penis?", "b00-what-blerb.html", "wtf", "b00-what.html")]
 
 def findBlog(articleId):
   for blog in blogPosts:
