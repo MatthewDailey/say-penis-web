@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Say Penis</title>
+  <!-- CSS  -->
+  {% include 'css.html' %}
+</head>
+<!-- uncomment to enable intercom.io user tracking {% include 'intercom.html' %} -->
+<body>
+ {% include 'navbar.html' %}
+ <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <h1 class="header center red-text cock">Top Scores</h1>
+    <div class="row center">
+      <span class="flow-text col s12">Live ranking of the cream of the crop.</span>
+    </div>
+    <br>
+    
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="row section">
+      <div class="col s12 m8 offset-m2 l8 offset-l2">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title red-text">This list is kind of short.</span>
+          <p>Say Penis has been temporarily removed from the Google Play Store.</p>
+          <br>
+          <p>We'll be back soon so I've left up a few scores for you to look at and written a
+          few blog posts in the mean time.</p>
+        </div>          
+        <div class="card-action">
+          <a href="/blog" class="red-text">Check out the blog</a>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="row section">
+      <table class="hoverable centered">
+        <thead>
+          <tr>
+              <th data-field="position"></th>
+              <th data-field="name">Name</th>
+              <th data-field="score">Score</th>
+              <th data-field="audio">Audio</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for round in rounds %}
+          <tr>
+            <td>{{ loop.index }}.</td>
+            <td>{{ round.name }}</td>
+            <td>{{ round.score }}</td>
+            {% if "say-penis-clean-recordings" in round.uri %}
+              <td>                
+                <audio controls>
+                  <source src="{{round.uri}}" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>  
+            {% else %} 
+              <td>No audio available.</td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>    
+  </div>
+</div>
+
+
+      
+
+{% include 'play-on-android.html' %}
+
+{% include 'footer.html' %}
+{% include 'scripts.html' %}
+
+</body>
+</html>

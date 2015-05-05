@@ -18,6 +18,8 @@ import logging
 import os
 import webapp2
 import jinja2
+import json
+import urllib
 import google.appengine.api.mail as mail
 from google.appengine.ext import ndb
 from datetime import datetime
@@ -53,6 +55,12 @@ def findBlog(articleId):
     if blog.articleId == articleId:
       return blog
   return None
+
+class Round:
+  def __init__(self, name, score, date):
+    self.name = name
+    self.score = score
+    self.date = date
 
 class AlphaRequest(ndb.Model):
   email = ndb.StringProperty()
@@ -112,6 +120,16 @@ class CareerHandler(webapp2.RequestHandler):
     template = JINJA_ENVIRONMENT.get_template('careers.html')
     self.response.write(template.render({}))   
 
+def getTopScores():
+    topPlayersJson = urllib.urlopen("http://recognition-server.elasticbeanstalk.com/api/v1/read/top?page_size=50").read()
+    logging.info(topPlayersJson)
+    return json.loads(topPlayersJson)
+
+class TopPlayersHandler(webapp2.RequestHandler):
+  def get(self):
+    template = JINJA_ENVIRONMENT.get_template('top-players.html')
+    self.response.write(template.render({"rounds": getTopScores()}))   
+
 class FourOhFourHandler(webapp2.RequestHandler):
   def get(self, url):
     template = JINJA_ENVIRONMENT.get_template('four_oh_four.html')
@@ -130,5 +148,6 @@ app = webapp2.WSGIApplication([
     ('/blog/(.*)', BlogHandler),
     ('/careers', CareerHandler),
     ('/alpha', AlphaTestHandler),
+    ('/top', TopPlayersHandler),
     ('/(.*)', FourOhFourHandler)
 ], debug=True)
