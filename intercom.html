@@ -8,7 +8,7 @@
     var w=window;
     var ic=w.Intercom;
     if(typeof ic==="function"){
-        
+        ic('reattach_activator');
         ic('update',intercomSettings);
     }else{
         var d=document;
