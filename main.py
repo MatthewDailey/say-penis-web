@@ -83,25 +83,7 @@ class InvalidShareHandler(webapp2.RequestHandler):
     self.response.write(template.render({"error_message":"The code '" + url +\
        "' is not a valid penis code. Once you have a valid penis code, enter \
        it in the android app to listen."}))
-
-class AlphaTestHandler(webapp2.RequestHandler):
-  def get(self):
-    template = JINJA_ENVIRONMENT.get_template('alpha-test.html')
-    self.response.write(template.render({"success":False}))
   
-  def post(self):
-    template = JINJA_ENVIRONMENT.get_template('alpha-test.html')
-    email = self.request.get('email')
-    try:
-      mail.check_email_valid(email, 'email')
-      alphaRequest = AlphaRequest(id=email)
-      alphaRequest.email = email
-      alphaRequest.request_time = datetime.now()
-      alphaRequest.put()
-      self.response.write(template.render({"success":True, "email":email}))
-    except:
-      self.response.write(template.render({"success":False, "email":email}))
-
 class BlogHandler(webapp2.RequestHandler):
   def get(self, url):
     blog = findBlog(url)
@@ -147,7 +129,6 @@ app = webapp2.WSGIApplication([
     ('/blog', BaseBlogHandler),
     ('/blog/(.*)', BlogHandler),
     ('/careers', CareerHandler),
-    ('/alpha', AlphaTestHandler),
     ('/top', TopPlayersHandler),
     ('/(.*)', FourOhFourHandler)
 ], debug=True)
