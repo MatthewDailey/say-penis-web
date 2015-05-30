@@ -103,9 +103,11 @@ class CareerHandler(webapp2.RequestHandler):
     self.response.write(template.render({}))   
 
 def getTopScores():
-    topPlayersJson = urllib.urlopen("http://recognition-server.elasticbeanstalk.com/api/v1/read/top?page_size=50").read()
-    logging.info(topPlayersJson)
-    return json.loads(topPlayersJson)
+    try:
+      topPlayersJson = urllib.urlopen("http://recognition-server.elasticbeanstalk.com/api/v1/read/top?page_size=50").read()
+      return json.loads(topPlayersJson)
+    except:
+      return {"rounds" : []}
 
 class TopPlayersHandler(webapp2.RequestHandler):
   def get(self):
