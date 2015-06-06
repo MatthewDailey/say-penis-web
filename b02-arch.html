@@ -1,0 +1,99 @@
+{% extends "abstract-blog.html" %}
+
+{% block title %}Say Penis Architecture{% endblock %}
+
+{% block content %}
+<div class="row center">
+    <span class="flow-text">A peak behind the loin cloth.</span>
+</div>
+<br>
+
+<div class="row">
+    <div class="col l8 offset-l2 s12" style="line-height: 2em;"> 
+        <p>This is a discussion of the stack that makes the Say Penis app. I'm confindent that this
+        is a reliable, scalable and debuggable architecture. However, most of the choices between
+        leading technologies were made based on using technology with which I am familiar.</p>
+        <p>Spoiler alert: I used to work at Amazon.</p>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col l8 offset-l2 s12"> 
+        <img class="responsive-img" src="/images/sp-arch.png">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col l8 offset-l2 s12" style="line-height: 2em;"> 
+        <p>The stack is dead simple. Your phone reads and writes directly to DynamoDB tables for 
+        penis scores and whenever you share or try to view a penis shared with you. Penis audio
+        is stored in S3 and referenced via a url stored with the penis score.</p>
+
+        <p>Unexpected crashes are handled by the Crashlytics and usage analytics is also stored in 
+        DynamoDB and can be processed via AWS Data Pipelines. I'll get into Crashlytics and UA more later.</p>
+
+        <span class="flow-text"><b>Question 1:</b> Why no central server?</span>
+
+        <p>A central server would make writing future clients (such as iOS or web) easier since all
+        the client applications could hit the same REST endpoint. However, when I'm doing a side 
+        project like this, I don't want to deal with a single point of failure. If one person's phone
+        hit and edge case I haven't thought over, who cares? Only that person. Furthermore, when that
+        does happen, Crashlytics opens an issue for me to track fixing that bug.</p>
+
+        <p>If that happens server side and my service starts crashing its bad news bears for everyone.
+        That single point of failure is the kind of thing that keeps my up at night.</p>
+
+        <p>A relevant anecdote is that for a while, when I thought Google had modified part of the 
+        voice API I rely on I actually wrote a central server running on AWS Elasticbeanstalk based off of 
+        <a href="http://cmusphinx.sourceforge.net/" target="_blank">CMUSphinx</a> that handled all the scoring and 
+        writing to dynamo logic. In fact, the <a href="/top" target="_blank">top scores</a> page gets its scores by
+        hitting that API. I leave that service up in read-only mode since it keeps the global top
+        scores in memory for fast access.</p> 
+
+        <span class="flow-text"><b>Question 2:</b> Why AWS and not Google's cloud?</span>        
+
+        <p>The first (and main reason) is that I'm significantly more familiar AWS products and very
+        comfortable spinning up new stack.</p>
+
+        <p>Secondly, I took this <a href="https://www.edx.org/blog/free-amazon-web-services-edx" target="_blank">
+        awesome edX course</a> and got $1000 in AWS credit. During development, Say Penis has cost me
+        about $40 in AWS credit so having a bank roll is nice.</p>
+
+        <p>Third, integrating android with AWS is easier than doing it with Google's tools in my 
+        experience. I'm not an expert in Google Cloud Endpoints by any means but as a backend dev
+        I feel more comfortable (and move much faster) throwing up a Jersey service on Elasticbeanstalk.
+        Likewise, I feel more comfortable talking directly to dynamo than learning Google whatever-awesome-nosql-store-they-have.
+        Just personal preference.</p>
+
+        <span class="flow-text" target="_blank"><b>Question 3:</b> What's the deal with Crashlytics and Usage Analytics?</span>        
+
+        <p>If you are writing apps and not using <a href="https://try.crashlytics.com/" target="_blank">Crashlytics</a> or
+        something similar, you're fuckin' up. It catches exceptions and gives you all the awesome 
+        juicey details about wtf happened to you app. I set it up via the <a href="https://www.fabric.io" target="_blank">Fabric</a>
+        Eclipse plugin which takes about 20 seconds to do. Seriously, try it.</p>
+
+        <p>Later I'll write another post later about other awesome tools I've been trying out for this project.</p>
+
+        <p>As for Usage Analytics, I know a lot of companies provide awesome services here (even Amazon
+        has one I could add to my chart). However, they didn't meet my needs so I wrote 
+        <a href="https://github.com/MatthewDailey/usage-analytics" target="_blank">my own</a>.</p>
+
+        <p>Most existing UA products value seems to come from the pretty pictures they draw for you
+        and are mildly painful to install or cost money.</p>
+
+        <p>What I wanted was a super easy way to dump simple actions into a place that I could go 
+        look at them later. I don't need awesome, constantly refreshing graphs showing my perf and click-thru 
+        numbers. All I want is to go back later and nerd out over some data.</p>
+
+        <p>My android usage analytics library allows dumping rows directly into dynamo which a couple
+        customizable columns for payload. This is perfect because at whatever point I decide to throw
+        my data in an elasticsearch cluster or some other fancy-pants data analysis tool, I can simply
+        run a AWS Datapipeline, dump my table and much around with it.</p>
+
+        
+    </div>
+</div>
+
+<p></p>
+{% endblock %}
